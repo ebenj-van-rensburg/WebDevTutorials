@@ -7,3 +7,7 @@ hello2 = "foo"; // is allowed as "foo" is the same type as "world" (string)
 
 let hello3: string = "world";
 // hello3 = []
+
+const getFullName = (name: string, surname: string) => {
+    return `${name} ${surname}`;
+};

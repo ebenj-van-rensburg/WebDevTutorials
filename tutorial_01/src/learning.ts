@@ -206,6 +206,134 @@ let animal: Animal = new Animal("Lion");
 
 animal.speak(); // Lion makes a sound.
 
+// abstract classes
+
+abstract class Vehicle {
+  abstract makeSound(): void;
+}
+
+class Car extends Vehicle {
+  makeSound(): void {
+    console.log("Car makes a vroom sound.");
+  }
+}
+
+let car: Car = new Car();
+
+car.makeSound(); // Car makes a vroom sound.
+
+// private and protected members
+
+class AnimalWithPrivateProperty {
+  private _name: string;
+
+  constructor(name: string) {
+    this._name = name;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    if (typeof value === "string") {
+      this._name = value;
+    } else {
+      throw new Error("Name must be a string.");
+    }
+  }
+}
+
+let animalWithPrivateProperty: AnimalWithPrivateProperty = new AnimalWithPrivateProperty("Lion");
+
+console.log(animalWithPrivateProperty.name); // Lion
+
+animalWithPrivateProperty.name = "Tiger";
+
+console.log(animalWithPrivateProperty.name); // Tiger
+
+class AnimalWithProtectedProperty {
+  protected _name: string;
+  protected constructor(name: string) {
+    this._name = name;
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    if (typeof value === "string") {
+      this._name = value;
+    } else {
+      throw new Error("Name must be a string.");
+    }
+  }
+  makeSound(): void {
+    console.log(`${this.name} makes a sound.`);
+  }
+  makeSoundProtected(): void {
+    console.log(`${this.name} makes a sound (protected).`);
+  }
+  static staticProperty: number = 0;
+
+  static incrementStaticProperty(): void {
+    AnimalWithProtectedProperty.staticProperty++;
+  }
+  static decrementStaticProperty(): void {
+    AnimalWithProtectedProperty.staticProperty--;
+  }
+  static getStaticProperty(): number {
+    return AnimalWithProtectedProperty.staticProperty;
+  }
+  static createAnimalWithProtectedProperty(name: string): AnimalWithProtectedProperty {
+    return new AnimalWithProtectedProperty(name);
+  }
+}
+
+let animalWithProtectedProperty: AnimalWithProtectedProperty = AnimalWithProtectedProperty.createAnimalWithProtectedProperty("Tiger");
+
+console.log(animalWithProtectedProperty.name); // Tiger
+
+animalWithProtectedProperty.makeSound(); // Tiger makes a sound.
+
+animalWithProtectedProperty.makeSoundProtected(); // Tiger makes a sound (protected).
+
+AnimalWithProtectedProperty.incrementStaticProperty();
+
+console.log(AnimalWithProtectedProperty.getStaticProperty()); // 1
+
+AnimalWithProtectedProperty.decrementStaticProperty();
+
+console.log(AnimalWithProtectedProperty.getStaticProperty()); // 0
+
+// static members
+
+class AnimalWithStaticProperty {
+  static staticProperty: number = 0;
+
+  static incrementStaticProperty(): void {
+    AnimalWithStaticProperty.staticProperty++;
+  }
+  static decrementStaticProperty(): void {
+    AnimalWithStaticProperty.staticProperty--;
+  }
+  static getStaticProperty(): number {
+    return AnimalWithStaticProperty.staticProperty;
+  }
+}
+
+AnimalWithStaticProperty.incrementStaticProperty();
+
+console.log(AnimalWithStaticProperty.getStaticProperty()); // 1
+
+AnimalWithStaticProperty.decrementStaticProperty();
+
+console.log(AnimalWithStaticProperty.getStaticProperty()); // 0
+
+// type inference
+
+// let num: number = 10;
+// let str: string = num.toString();
+
 // inheritance
 
 class Cat extends Animal {
