@@ -135,9 +135,6 @@ const TodayWeather: React.FC<{ data?: WeatherDetail; cityData?: WeatherData['cit
             </p>
           </div>
           <div className="flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3">
-            {/** Previously, we might have incorrectly tried to map through `cityData.list`. 
-                 Now, we correct this by accessing a valid array or property, if available. */}
-            {/** Ensure the proper array is being iterated over, and remove incorrect property access */}
             {data && data.weather.map((weather, i) => (
               <div
                 key={i}
